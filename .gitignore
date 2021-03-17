@@ -6,7 +6,7 @@ working
 # Packaging Files
 build
 dist
-src/webspider.egg-info
+src/DigitalSpot.egg-info
 
 # For Reasons Unbeknownst to Me, I Cannot Choose The Download Location Of The Undetectable Driver
 chromedriver

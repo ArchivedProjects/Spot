@@ -8,9 +8,9 @@ from selenium.common.exceptions import TimeoutException, StaleElementReferenceEx
 from selenium.webdriver.remote.webelement import WebElement
 from seleniumwire.request import Request
 
-from webspider.browser import Browser
-from webspider.feed import Feed
-from webspider.sitemap import Sitemap
+from digitalspot.browser import Browser
+from digitalspot.feed import Feed
+from digitalspot.sitemap import Sitemap
 
 import os
 import pickle

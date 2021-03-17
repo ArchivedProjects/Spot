@@ -14,4 +14,4 @@ if [ ! -d "./working" ]; then
   mkdir ./working
 fi
 
-python3 src/main.py "$@" 2>&1 | tee ./working/webspider.log
+python3 src/main.py "$@" 2>&1 | tee ./working/digitalspot.log
