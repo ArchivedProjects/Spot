@@ -1,5 +1,7 @@
 ### This software is in Alpha!!!
 
+# Sister project to [Rover](https://github.com/alexis-evelyn/Rover)
+
 ### For some reason, Mozilla decided [not to be helpful][mozilla] in hiding the WebDriver flag. Notice the deleted comment. So, we are using Chromium
 
 # RPi
