@@ -5,6 +5,8 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/venv" />
       <excludeFolder url="file://$MODULE_DIR$/working" />
+      <excludeFolder url="file://$MODULE_DIR$/crawler/webcrawler.egg-info" />
+      <excludeFolder url="file://$MODULE_DIR$/dist" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.9 (Logos2K)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
