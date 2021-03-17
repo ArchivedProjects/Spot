@@ -1,7 +1,0 @@
-pyproject.toml
-setup.cfg
-crawler/webspider.egg-info/PKG-INFO
-crawler/webspider.egg-info/SOURCES.txt
-crawler/webspider.egg-info/dependency_links.txt
-crawler/webspider.egg-info/requires.txt
-crawler/webspider.egg-info/top_level.txt

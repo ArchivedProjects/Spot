@@ -4,8 +4,9 @@ venv
 working
 
 # Packaging Files
+build
 dist
-crawler/webspider.egg-info
+src/webspider.egg-info
 
 # For Reasons Unbeknownst to Me, I Cannot Choose The Download Location Of The Undetectable Driver
 chromedriver

@@ -8,9 +8,7 @@ from selenium.common.exceptions import TimeoutException, StaleElementReferenceEx
 from selenium.webdriver.remote.webelement import WebElement
 from seleniumwire.request import Request
 
-from crawler.browser import Browser
-from crawler.feed import Feed
-from crawler.sitemap import Sitemap
+from src.webspider import Browser, Feed, Sitemap
 
 import os
 import pickle
