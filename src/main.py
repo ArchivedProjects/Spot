@@ -8,14 +8,16 @@ from selenium.common.exceptions import TimeoutException, StaleElementReferenceEx
 from selenium.webdriver.remote.webelement import WebElement
 from seleniumwire.request import Request
 
-from src.webspider import Browser, Feed, Sitemap
+from webspider.browser import Browser
+from webspider.feed import Feed
+from webspider.sitemap import Sitemap
 
 import os
 import pickle
 import requests
 
 # Directories
-working_dir: str = "working"
+working_dir: str = "../working"
 pickle_dir: str = os.path.join(working_dir, "pickles")
 blocklists_dir: str = os.path.join(working_dir, "blocklists")
 complete_blocklist: str = os.path.join(blocklists_dir, "complete-list.txt")

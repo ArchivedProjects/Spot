@@ -14,7 +14,7 @@ from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
 from seleniumwire.request import Request
 
-from src.webspider.robots import Robots
+from webspider.robots import Robots
 
 import os
 
