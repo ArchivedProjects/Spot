@@ -3,5 +3,9 @@ __pycache__
 venv
 working
 
+# Packaging Files
+dist
+crawler/webcrawler.egg-info
+
 # For Reasons Unbeknownst to Me, I Cannot Choose The Download Location Of The Undetectable Driver
 chromedriver

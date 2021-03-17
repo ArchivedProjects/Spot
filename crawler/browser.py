@@ -151,8 +151,8 @@ class Browser:
 
         return False
 
-    def get(self, url: str) -> bool:
-        if self.robots.can_crawl_now(url=url):
+    def get(self, url: str, override: bool = False) -> bool:
+        if self.robots.can_crawl_now(url=url) or override:
             # Get Page
             self.browser.get(url=url)
 
