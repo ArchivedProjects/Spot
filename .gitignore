@@ -5,7 +5,7 @@ working
 
 # Packaging Files
 dist
-crawler/webcrawler.egg-info
+crawler/webspider.egg-info
 
 # For Reasons Unbeknownst to Me, I Cannot Choose The Download Location Of The Undetectable Driver
 chromedriver
