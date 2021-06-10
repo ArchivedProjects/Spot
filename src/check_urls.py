@@ -92,7 +92,7 @@ def setup():
     # download_blocklists()
 
 
-class AlarmTimeoutException():
+class AlarmTimeoutException(BaseException):
     pass
 
 
