@@ -208,16 +208,22 @@ if __name__ == "__main__":
 
     print("About to import URLs")
     agencies = pd.read_csv(os.path.join(working_dir, "agency-urls.csv"))
-    # datasets = pd.read_csv(os.path.join(working_dir, "datasets-urls.csv"))
+    datasets = pd.read_csv(os.path.join(working_dir, "datasets-urls.csv"))
 
     # test_crash: list = ["https://jerseyvillagepd.org/(X(1)S(hj4mma0lfyflknyuu5okfftu))/default.aspx?AspxAutoDetectCookieSupport=1"]
     agency_urls: list = agencies["homepage_url"].unique().tolist()
-    # dataset_urls: list = datasets["url"].unique().tolist()
+    dataset_urls: list = datasets["url"].unique().tolist()
 
     # screenshot_pages(urls=agency_urls, prefix="agencies_test_crash")
     print("Starting Screenshotting")
-    # screenshot_pages(urls=dataset_urls, prefix="datasets")
+    print("Screenshotting Agencies...")
     screenshot_pages(urls=agency_urls, prefix="agencies")
+
+    print("Screenshotting Datasets...")
+    screenshot_pages(urls=dataset_urls, prefix="datasets")
+    print("Finished Screenshotting")
 
     browser.quit()
     pickle.dump(browser.robots, open(robots_pickle, mode="wb+"))
+
+    print("Done!!!")
