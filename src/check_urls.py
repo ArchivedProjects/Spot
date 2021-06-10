@@ -92,10 +92,14 @@ def setup():
     # download_blocklists()
 
 
+class AlarmTimeoutException():
+    pass
+
+
 def alarm_handler(signum, frame):
     # Note: This is a backup method to ensure that Chrome/Selenium doesn't freeze the script
     # print("Received Backup Time Out Message")
-    raise TimeoutException()
+    raise AlarmTimeoutException()
 
 
 def screenshot_pages(urls: list, prefix: str):
@@ -141,6 +145,9 @@ def screenshot_pages(urls: list, prefix: str):
             # successful = False
         except TimeoutException:
             print(f"Retrieving Page Timed Out: {url}")
+        except AlarmTimeoutException:
+            print(f"Retrieving Page Timed Out Via Alarm: {url}")
+            signal.alarm(0)  # Turn Off Time Out Alarm
         except Exception as e:
             if "chrome not reachable" in str(e):
                 print("Chrome Crashed!!! It's Probably A Zombie Process!!!")
@@ -162,6 +169,9 @@ def screenshot_pages(urls: list, prefix: str):
                 print(f"Took Screenshot Of: `{url}` and saved to: {screenshot_file}")
             except TimeoutException:
                 print(f"Screenshot Page Timed Out: {url}")
+            except AlarmTimeoutException:
+                print(f"Screenshot Page Timed Out Via Alarm: {url}")
+                signal.alarm(0)  # Turn Off Time Out Alarm
             except StaleElementReferenceException:
                 print(f"Screenshot Page Failed Due To Page Refresh: {url}")
             except Exception as e:
