@@ -104,7 +104,10 @@ def screenshot_pages(urls: list, prefix: str):
 
     download_me_urls: list = []
     for url in urls:
-        screenshot_file = os.path.join(working_dir, "screenshots", prefix, f"{base64.b64encode(bytes(url, 'utf-8')).decode('utf-8')}.png")
+        # TIL that Base64 can have + and /. The / is obviously not good because directory separators.
+        # So, I replace the / with - in order to fix that so base64 can be used for filenames.
+        # https://base64.guru/learn/base64-characters
+        screenshot_file = os.path.join(working_dir, "screenshots", prefix, f"{base64.b64encode(bytes(url, 'utf-8')).decode('utf-8').replace('/', '-')}.png")
 
         if not os.path.exists(screenshot_file) and url not in download_me_urls:
             download_me_urls.append(url)
@@ -112,7 +115,7 @@ def screenshot_pages(urls: list, prefix: str):
     download_me_urls.reverse()
     print(f"Finished Cleaning Up Already Downloaded URLs for `{prefix}`...")
     for url in download_me_urls:
-        screenshot_file = os.path.join(working_dir, "screenshots", prefix, f"{base64.b64encode(bytes(url, 'utf-8')).decode('utf-8')}.png")
+        screenshot_file = os.path.join(working_dir, "screenshots", prefix, f"{base64.b64encode(bytes(url, 'utf-8')).decode('utf-8').replace('/', '-')}.png")
 
         if os.path.exists(screenshot_file):
             print(f"Skipping `{url}` as already saved")
