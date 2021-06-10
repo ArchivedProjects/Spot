@@ -63,7 +63,8 @@ class Browser:
         # self.options.add_argument('--incognito')  # Incognito Mode
         # self.options.add_argument('--no-referrers')  # Hide Referral Websites
         # self.options.add_argument('--no-experiments')  # Disable Chrome Flags
-        # self.options.add_argument('--remote-debugging-port=9222')  # For Debugging
+        self.options.add_argument('--remote-debugging-port=9222')  # For Debugging
+        self.options.add_argument('--ignore-certificate-errors')  # To Ignore Bad Certificates
 
         if self.headless:
             # print("No V-Screen Available!!! Starting Headless!!!")
