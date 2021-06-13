@@ -13,6 +13,7 @@ from digitalspot.feed import Feed
 from digitalspot.sitemap import Sitemap
 
 import os
+import json
 import pickle
 import requests
 import pandas as pd
@@ -205,6 +206,19 @@ if __name__ == "__main__":
     browser.page_timeout = 40  # Default 20
     browser.setup_browser()
     browser.start_browser()
+
+    print("Importing Facebook Cookies")
+    facebook_cookie_path = os.path.join(working_dir, "facebook_cookies.json")
+    facebook_cookie_list = json.load(open(file=facebook_cookie_path, mode="r"))
+
+    facebook_get: bool = browser.get("https://facebook.com/", override=True)
+    print(f"Got Facebook: {facebook_get}")
+    for facebook_cookie in facebook_cookie_list:
+        browser.browser.add_cookie(facebook_cookie)
+        # print(facebook_cookie)
+
+    # browser.quit()
+    # exit(0)
 
     print("About to import URLs")
     agencies = pd.read_csv(os.path.join(working_dir, "agency-urls.csv"))
