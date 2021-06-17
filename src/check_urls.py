@@ -2,6 +2,7 @@
 # TODO: Add means of checking the last pickle save time and starting a new instance if the pickle is too old
 
 from typing import List, Optional
+from urllib.parse import urlparse
 
 from requests import Response
 from selenium.common.exceptions import TimeoutException, StaleElementReferenceException
@@ -48,6 +49,9 @@ blocklists: dict = {
     "scam": "https://blocklistproject.github.io/Lists/alt-version/scam-nl.txt",
     "tracking": "https://blocklistproject.github.io/Lists/alt-version/tracking-nl.txt"
 }
+
+# For Identifying Domains To Toss
+banned_domains: list = ["kxii.com", "wrbl.com", "ajc.com", "thenortheastgeorgian.com", "wsbtx.com", "10tv.com", "13wmaz.com", "morningjournal.com", "thedailynewsonline.com", "11alive.com", "tribdem.com", "kiiitv.com", "register-herald.com", "krtv.com", "knoxnews.com", "king5.com", "postandcourier.com", "chicagotribune.com", "newstribune.info", "wgntv.com", "swnewsmedia.com", "mprnews.org", "greensboro.com", "myfox8.com", "theworldlink.com", "kcby.com", "kiro7.com", "myhighplains.com", "newschannel10.com", "abc7amarillo.com", "news-leader.com", "bnd.com", "newarkadvocate.com", "abc6onyourside.com", "kark.com", "clintonnc.com", "abc11.com", "wral.com", "theadvocate.com", "wreg.com", "reporternewspapers.net", "wjhg.com", "pantagraph.com", "oklahomafarmreport.com", "newsobserver.com", "nbcnews.com", "wbrz.com", "wafb.com", "news4jax.com", "fox5atlanta.com", "wjhg.com", "stgeorgeutah.com", "thetimestribune.com", "kark.com", "fox2now.com", "thesungazette.com", "lockportjournal.com", "tennessean.com", "chronicle-independent.com", "wistv.com", "newsday.com", "news-graphic.com", "coloradoan.com", "thehill.com", "fox59.com", "nottinghampost.com", "kfor.com", "galesburg.com", "galvnews.com", "kval.com", "oregonlive.com", "foxnews.com", "wsbtv.com", "cnbc.com", "cbs.com", "nytimes.com", "usacops.com", "crimewatchpa.com", "policescorecard.org", "allacronyms.com", "policequiz.com", "police1.com", "claimspages.com", "policelocator.com"]
 
 
 def download_blocklists():
@@ -109,6 +113,11 @@ def screenshot_pages(urls: list, prefix: str):
 
     download_me_urls: list = []
     for url in urls:
+        domain: str = urlparse(url).netloc
+
+        if domain in banned_domains:
+            continue
+
         # TIL that Base64 can have + and /. The / is obviously not good because directory separators.
         # So, I replace the / with - in order to fix that so base64 can be used for filenames.
         # https://base64.guru/learn/base64-characters
@@ -223,18 +232,27 @@ if __name__ == "__main__":
     print("About to import URLs")
     agencies = pd.read_csv(os.path.join(working_dir, "agency-urls.csv"))
     datasets = pd.read_csv(os.path.join(working_dir, "datasets-urls.csv"))
+    searched_datasets = pd.read_csv(os.path.join(working_dir, "searched-urls.csv"))
 
     # test_crash: list = ["https://jerseyvillagepd.org/(X(1)S(hj4mma0lfyflknyuu5okfftu))/default.aspx?AspxAutoDetectCookieSupport=1"]
     agency_urls: list = agencies["homepage_url"].unique().tolist()
     dataset_urls: list = datasets["url"].unique().tolist()
+    searched_urls: list = datasets["url"].unique().tolist()
 
-    # screenshot_pages(urls=agency_urls, prefix="agencies_test_crash")
     print("Starting Screenshotting")
-    print("Screenshotting Agencies...")
-    screenshot_pages(urls=agency_urls, prefix="agencies")
 
-    print("Screenshotting Datasets...")
-    screenshot_pages(urls=dataset_urls, prefix="datasets")
+    # print("Screenshotting Agencies For Testing Crashing...")
+    # screenshot_pages(urls=agency_urls, prefix="agencies_test_crash")
+
+    # print("Screenshotting Agencies...")
+    # screenshot_pages(urls=agency_urls, prefix="agencies")
+    #
+    # print("Screenshotting Datasets...")
+    # screenshot_pages(urls=dataset_urls, prefix="datasets")
+
+    print("Screenshotting Searched URLs...")
+    screenshot_pages(urls=searched_urls, prefix="searched")
+
     print("Finished Screenshotting")
 
     browser.quit()
